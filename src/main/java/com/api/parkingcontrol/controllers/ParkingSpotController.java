@@ -18,17 +18,30 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
-
+/*
+ * As classes contidas no package "com.api.parkingcontrol.controllers", são responsáveis
+ * por receber as requisições HTTP e devem ter a anotoção @RestController, esta classe
+ * recebe as requisições que disponibilizam as operações necessárias para controlar o
+ * estacionamento em um condomínio.
+ *
+ */
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/parking-spot")
 public class ParkingSpotController {
-    /*
-    injeção de dependencia de parkingSportService
+    /**
+     * Injeção de dependencia de parkingSportService
      */
     @Autowired
     ParkingSportService parkingSportService;
 
+    /**
+     * O método abaixo é reponsável por receber requisições do tipo POST, em verbo HTTP
+     * indica que o serviço disponibilizado cria um novo recurso e devolve uma resposta
+     * com o HTTP status igual a 201.
+     * @param parkingSpotDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         if (parkingSportService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())) {
@@ -54,6 +67,13 @@ public class ParkingSpotController {
 
     }
 
+    /**
+     * O método abaixo responde requisiçoes do tipo GET, com o parâmetro de busca "id",
+     * ou seja ele retorna uma busca feita através do id, devolvento os valores que estão no "id"
+     * setado no parâmetro.
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") UUID id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSportService.findById(id);
@@ -63,6 +83,13 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotModelOptional.get());
     }
 
+    /**
+     * O método abaixo responde requisições do tipo DELETE, este método é responsável por
+     * DELETAR recuros através do parâmetro "id", sendo assim excluindo as informações contidas
+     * no "id" setado.
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteParkingSpot(@PathVariable(value = "id") UUID id) {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSportService.findById(id);
@@ -73,6 +100,13 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body("Parking Spot Delete Succesfully!");
     }
 
+    /**
+     * O método abaixo responde requisições do tipo PUT, tem como responsabilidade atualizar informações
+     * de um recurso já criado, usando como referencia o "id" setado na URL .
+     * @param id
+     * @param parkingSpotDto
+     * @return
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id, @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         try {
@@ -91,7 +125,6 @@ public class ParkingSpotController {
             parkingSpotModel.setId(id);
             parkingSpotModel.setRegistrationDate(parkingSpotDto.getRegistrationDate());
             // parkingSpotModel.setColorCar(parkingSpotDto.getColorCar());
-
             return ResponseEntity.status(HttpStatus.OK).body(parkingSportService.save(parkingSpotModel));
         } catch (Exception e) {
             e.printStackTrace();

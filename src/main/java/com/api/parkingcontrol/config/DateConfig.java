@@ -6,15 +6,16 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Classe responsável por formatar a data com o formato de
+ * padrão de mercado.
+ */
 @Configuration
 public class DateConfig {
     public static final String DATETIME_FORMAT= "yyyy-MM-dd'T'HH:mm:ss'Z'";
     public static LocalDateTimeSerializer LOCAL_DATETIME_SERIALIZER= new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-
     @Bean
     @Primary
     public ObjectMapper objectMapper() {
@@ -23,5 +24,5 @@ public class DateConfig {
         return new ObjectMapper()
                 .registerModule(module);
     }
-    }
+}
 

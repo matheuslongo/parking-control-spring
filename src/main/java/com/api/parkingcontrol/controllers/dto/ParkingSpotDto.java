@@ -4,8 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Está é uma classe DTO serão utilizadas como retorno dos métodos
+ * da camada controller.
+ */
 public class ParkingSpotDto {
-    // @NotBlank define que o valor nao pode ser nulo
     @NotBlank
     private String parkingSpotNumber;
     @NotBlank
