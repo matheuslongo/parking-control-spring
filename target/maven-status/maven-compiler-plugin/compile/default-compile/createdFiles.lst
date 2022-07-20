@@ -1,6 +1,6 @@
 com/api/parkingcontrol/controllers/ParkingSpotController.class
 com/api/parkingcontrol/controllers/dto/ParkingSpotDto.class
-com/api/parkingcontrol/repositories/ParkingSpotRepository.class
+com/api/parkingcontrol/repository/ParkingSpotRepository.class
 com/api/parkingcontrol/services/ParkingSportService.class
 com/api/parkingcontrol/ParkingControlApplication.class
 com/api/parkingcontrol/models/ParkingSpotModel.class
