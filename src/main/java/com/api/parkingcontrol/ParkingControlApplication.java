@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class ParkingControlApplication {
-	@GetMapping("/swagger-ui/index.html")
 	public static void main(String[] args) {SpringApplication.run(ParkingControlApplication.class,args);}
-
+		@GetMapping("/")
+		public String index(){
+			String redirectUrl = "https://parking-mml.herokuapp.com/swagger-ui/index.html";
+			return "redirect:" + redirectUrl;
+		}
 	}
 
 
