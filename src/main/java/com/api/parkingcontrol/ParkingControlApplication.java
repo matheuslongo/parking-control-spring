@@ -14,7 +14,7 @@ public class ParkingControlApplication {
 		@GetMapping("/")
 		public String index(){
 			return "Acesse meu link do GitHub para ver as funcionalidades desta API, ela necessita de um banco de dados PostgreSql para persistir os dados." +
-					"https://github.com/matheuslongo/parking-control-spring";
+					" https://github.com/matheuslongo/parking-control-spring";
 		}
 
 	}
